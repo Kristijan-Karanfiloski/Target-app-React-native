@@ -53,18 +53,6 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     setCurrentGuess(newRndNumber);
   };
 
-  let legalToDrink = 18;
-
-  if (legalToDrink) {
-    console.log("You can drink more");
-  } else {
-    console.log("Fuck off");
-  }
-
-  if (0) {
-    console.log("This will not work");
-  }
-
   return (
     <>
       <View style={styles.screen}>
