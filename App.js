@@ -1,49 +1,50 @@
 import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import {useEffect, useState} from "react";
-import * as SplashScreen from 'expo-splash-screen'
-import * as Font from 'expo-font'
+import { useEffect, useState } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
 import Colors from "./constants/colors";
 import GameOverScreen from "./screens/GameOverScreen";
 
-
-
-
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false)
+  const [appIsReady, setAppIsReady] = useState(false);
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(true);
+  const [guessRounds, setGuessRounds] = useState(0);
 
   useEffect(() => {
     async function prepare() {
       try {
         // await SplashScreen.preventAutoHideAsync();
-
         // await SplashScreen.hideAsync()
         await Font.loadAsync({
           "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
           "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
         });
-      }catch (e)
-      { console.warn(e)
+      } catch (e) {
+        console.warn(e);
       } finally {
-        setAppIsReady(true)
+        setAppIsReady(true);
       }
     }
-    prepare()
+    prepare();
   }, []);
 
-  if(!appIsReady){
-    return null
+  if (!appIsReady) {
+    return null;
   }
-
 
   const pickedNumberHandler = (pickedNumber) => {
     setUserNumber(pickedNumber);
     setGameIsOver(false);
+  };
+
+  const startNewGameHandler = () => {
+    setUserNumber(null);
+    setGuessRounds(0);
   };
   const theGameOverHandler = () => {
     setGameIsOver(true);
@@ -57,7 +58,13 @@ export default function App() {
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        roundsNumber={guessRounds}
+        onStartNewGame={startNewGameHandler}
+      />
+    );
   }
 
   return (
