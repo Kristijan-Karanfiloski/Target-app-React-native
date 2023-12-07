@@ -8,14 +8,27 @@ import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 import GuessLogItem from "../components/game/GuessLogItem";
 
-const generateRandomBetween = (min, max, exclude) => {
-  const rndNum = Math.floor(Math.random() * (max - min)) + min;
+// export const generateRandomBetween = (min, max, exclude) => {
+//   const rndNum = Math.floor(Math.random() * (max - min)) + min;
+//
+//   if (rndNum === exclude) {
+//     return generateRandomBetween(min, max, exclude);
+//   } else {
+//     return rndNum;
+//   }
+// };
+
+export const generateRandomBetween = (min, max, exclude) => {
+  if (min > max) {
+    throw new Error("min must be less than max");
+  }
+
+  const rndNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
   if (rndNum === exclude) {
-    return generateRandomBetween(min, max, exclude);
-  } else {
-    return rndNum;
+    return rndNum + 1 <= max ? rndNum + 1 : min;
   }
+  return rndNum;
 };
 
 let minBoundary = 1;

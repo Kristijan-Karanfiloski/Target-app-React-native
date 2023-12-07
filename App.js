@@ -1,7 +1,6 @@
 import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useState } from "react";
-import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { StatusBar } from "expo-status-bar";
 
@@ -31,7 +30,7 @@ export default function App() {
         setAppIsReady(true);
       }
     }
-    prepare();
+    prepare().then((r) => console.log(r));
   }, []);
 
   if (!appIsReady) {
@@ -98,6 +97,3 @@ const styles = StyleSheet.create({
     opacity: 0.15,
   },
 });
-export const myFunctionWithThrow = () => {
-  throw new Error();
-};
