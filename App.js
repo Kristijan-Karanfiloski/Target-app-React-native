@@ -98,3 +98,6 @@ const styles = StyleSheet.create({
     opacity: 0.15,
   },
 });
+export const myFunctionWithThrow = () => {
+  throw new Error();
+};
