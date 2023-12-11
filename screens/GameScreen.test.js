@@ -16,7 +16,6 @@ describe("GameScreen", () => {
 
     const opponentNumber = screen.findByText(userNumber);
 
-    // expect(screen.findByText(userNumber)).toBeOnTheScreen();
     // expect(screen.findByText(userNumber)).toBeTruthy();
   });
   it("should compare two values like ===", () => {
@@ -25,3 +24,5 @@ describe("GameScreen", () => {
     expect(name).toBe("John");
   });
 });
+
+it("should render", () => {});
